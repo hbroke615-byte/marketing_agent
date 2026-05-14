@@ -30,6 +30,14 @@ Thumbs.db
 # Auth / token files
 *.bin
 *.cache
+
+# Allow specific files
+!railway.json
+!linkedin_state.json
+!outlook_token_cache.bin
+!processed_email_ids.json
+!processed_marketing_onedrive_files.json
+!marketing_campaign_system_prompt.json
 *.db
 *.json
 
