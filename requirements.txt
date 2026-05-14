@@ -8,3 +8,6 @@ fastapi
 uvicorn
 playwright
 chromium
+Flask-Limiter
+uvicorn 
+gunicorn

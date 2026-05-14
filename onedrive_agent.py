@@ -2,8 +2,9 @@ import json
 import os
 
 import marketing_campaign_agent
+from config import PROCESSED_MARKETING_PATH
 
-PROCESSED_FILES_JSON = "processed_marketing_onedrive_files.json"
+PROCESSED_FILES_JSON = PROCESSED_MARKETING_PATH
 
 
 def load_processed_files():

@@ -410,7 +410,7 @@ HTML_PAGE = """
             <span class="status-badge">Connected</span>
           </div>
           <p class="connector-desc">Read inbound replies - send approved drafts</p>
-          <div class="connector-meta">Account: haris@outlook.com</div>
+          <div class="connector-meta">Account: dalbir.bains@outlook.com</div>
           <button class="disconnect-btn">Disconnect</button>
         </div>
         <div class="connector-card">
@@ -434,7 +434,7 @@ HTML_PAGE = """
             <span class="status-badge">Connected</span>
           </div>
           <p class="connector-desc">Context & profiles - post content</p>
-          <div class="connector-meta">Profile: Muhammad Usama</div>
+          <div class="connector-meta">Profile: Muhammad Haris</div>
           <button class="disconnect-btn">Disconnect</button>
         </div>
       </section>

@@ -15,13 +15,11 @@ from typing import Optional
 import openai
 from pydantic import BaseModel
 
-from config import OPENAI_API_KEY
+from config import OPENAI_API_KEY, MARKETING_PROMPT_CONFIG_PATH
 
 openai.api_key = OPENAI_API_KEY
 
-MARKETING_PROMPT_CONFIG_FILE = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "marketing_campaign_system_prompt.json"
-)
+MARKETING_PROMPT_CONFIG_FILE = MARKETING_PROMPT_CONFIG_PATH
 
 DEFAULT_MARKETING_SYSTEM_PROMPT = (
     "You are an expert B2B marketing campaign strategist. "

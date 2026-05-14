@@ -16,10 +16,11 @@ from config import (
     GRAPH_SCOPES,
     MARKETING_FOLDER_PATH,
     POLL_INTERVAL,
+    PROCESSED_EMAILS_PATH,
 )
 from graph import Graph
 
-PROCESSED_EMAILS_JSON = "processed_email_ids.json"
+PROCESSED_EMAILS_JSON = PROCESSED_EMAILS_PATH
 
 
 def _load_processed_email_ids():

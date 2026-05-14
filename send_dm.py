@@ -2,9 +2,9 @@ import time
 
 from playwright.sync_api import TimeoutError, sync_playwright
 
-from config import LINKEDIN_PROFILE_URL
+from config import LINKEDIN_PROFILE_URL, LINKEDIN_STATE_PATH
 
-LINKEDIN_STORAGE_STATE = "linkedin_state.json"
+LINKEDIN_STORAGE_STATE = LINKEDIN_STATE_PATH
 
 
 def send_dm(message, profile_url=LINKEDIN_PROFILE_URL):

@@ -4,7 +4,7 @@ import os
 import json
 from urllib.parse import quote
 
-TOKEN_CACHE_FILE = "outlook_token_cache.bin"
+from config import TOKEN_CACHE_PATH
 
 class Graph:
     def __init__(self, client_id, authority, scopes):
@@ -12,8 +12,8 @@ class Graph:
         self.cache = msal.SerializableTokenCache()
         
         # Load existing cache if present
-        if os.path.exists(TOKEN_CACHE_FILE):
-            with open(TOKEN_CACHE_FILE, "r") as f:
+        if os.path.exists(TOKEN_CACHE_PATH):
+            with open(TOKEN_CACHE_PATH, "r") as f:
                 self.cache.deserialize(f.read())
                 
         self.app = msal.PublicClientApplication(
@@ -43,7 +43,7 @@ class Graph:
         
         result = self.app.acquire_token_by_device_flow(flow)
         if "access_token" in result:
-            with open(TOKEN_CACHE_FILE, "w") as f:
+            with open(TOKEN_CACHE_PATH, "w") as f:
                 f.write(self.cache.serialize())
             print("✅ Login successful! Token cached.\n")
             return result["access_token"]
