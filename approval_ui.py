@@ -9,8 +9,8 @@ from urllib.parse import urlparse
 
 from marketing_campaign_agent import get_marketing_system_prompt, set_marketing_system_prompt
 
-APPROVAL_HOST = "127.0.0.1"
-APPROVAL_PORT = 8787
+APPROVAL_HOST = "0.0.0.0"
+APPROVAL_PORT = int(os.getenv("PORT", 8787))
 APPROVAL_URL = f"http://{APPROVAL_HOST}:{APPROVAL_PORT}"
 
 _SERVER = None
