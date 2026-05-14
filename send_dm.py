@@ -1,3 +1,4 @@
+import os
 import time
 
 from playwright.sync_api import TimeoutError, sync_playwright
@@ -17,7 +18,10 @@ def send_dm(message, profile_url=LINKEDIN_PROFILE_URL):
         browser = None
 
         try:
-            browser = playwright.chromium.launch(headless=False)
+            is_railway = os.getenv("RAILWAY_ENVIRONMENT") == "true" or os.getenv("RAILWAY_STATIC_URL") is not None
+            headless_mode = not is_railway  # Set to True if on Railway, False for local debugging
+            # Actually, let's just make it configurable or default to True for production
+            browser = playwright.chromium.launch(headless=os.getenv("HEADLESS", "true").lower() == "true")
             context = browser.new_context(storage_state=LINKEDIN_STORAGE_STATE)
             page = context.new_page()
 

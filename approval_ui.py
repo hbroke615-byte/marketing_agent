@@ -11,7 +11,7 @@ from marketing_campaign_agent import get_marketing_system_prompt, set_marketing_
 
 APPROVAL_HOST = "0.0.0.0"
 APPROVAL_PORT = int(os.getenv("PORT", 8787))
-APPROVAL_URL = f"http://{APPROVAL_HOST}:{APPROVAL_PORT}"
+APPROVAL_URL = f"http://localhost:{APPROVAL_PORT}"
 
 _SERVER = None
 _SERVER_LOCK = threading.Lock()

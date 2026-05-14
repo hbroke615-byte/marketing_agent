@@ -27,13 +27,13 @@ class Graph:
         accounts = self.app.get_accounts()
         if accounts:
             username = accounts[0].get("username") or accounts[0].get("home_account_id") or "unknown"
-            print(f"🔎 Using cached login for: {username}")
+            print(f"[CACHE] Using cached login for: {username}")
             result = self.app.acquire_token_silent(self.scopes, account=accounts[0])
             if result and "access_token" in result:
                 return result["access_token"]
 
         # If no token in cache, do device flow
-        print("\n🔑 Starting device code login...\n")
+        print("\n[AUTH] Starting device code login...\n")
         flow = self.app.initiate_device_flow(scopes=self.scopes)
         if "user_code" not in flow:
             raise Exception("Failed to start device flow: " + json.dumps(flow, indent=2))
@@ -45,7 +45,7 @@ class Graph:
         if "access_token" in result:
             with open(TOKEN_CACHE_PATH, "w") as f:
                 f.write(self.cache.serialize())
-            print("✅ Login successful! Token cached.\n")
+            print("[OK] Login successful! Token cached.\n")
             return result["access_token"]
         else:
             raise Exception("Login failed: " + json.dumps(result, indent=2))
@@ -61,7 +61,7 @@ class Graph:
         if response.status_code == 200:
             return response.json()
         print(
-            f"❌ Error calling /me ({response.status_code}): {response.text[:800]}"
+            f"[ERROR] Error calling /me ({response.status_code}): {response.text[:800]}"
         )
         return None
 
@@ -149,7 +149,7 @@ class Graph:
                         })
                 return emails_data
             else:
-                print(f"❌ Error fetching emails ({response.status_code}): {response.text[:800]}")
+                print(f"[ERROR] Error fetching emails ({response.status_code}): {response.text[:800]}")
                 return []
 
     def fetch_recent_emails(self, top=10):
@@ -201,7 +201,7 @@ class Graph:
                     )
             return emails_data
         print(
-            f"❌ Error fetching recent emails ({response.status_code}): "
+            f"[ERROR] Error fetching recent emails ({response.status_code}): "
             f"{response.text[:800]}"
         )
         return []
@@ -249,7 +249,7 @@ class Graph:
             history = history[:5]
             return history[::-1]
         else:
-            print(f"❌ Error fetching history ({response.status_code}): {response.text[:800]}")
+            print(f"[ERROR] Error fetching history ({response.status_code}): {response.text[:800]}")
             return []
 
     # ─────────────────────────────────────────────────────────────────
@@ -263,7 +263,7 @@ class Graph:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             return response.json().get("value", [])
-        print(f"❌ Error fetching attachments ({response.status_code}): {response.text[:400]}")
+        print(f"[ERROR] Error fetching attachments ({response.status_code}): {response.text[:400]}")
         return []
 
     def download_attachment_bytes(self, email_id, attachment_id):
@@ -278,7 +278,7 @@ class Graph:
             b64 = data.get("contentBytes", "")
             if b64:
                 return base64.b64decode(b64)
-        print(f"❌ Error downloading attachment ({response.status_code}): {response.text[:400]}")
+        print(f"[ERROR] Error downloading attachment ({response.status_code}): {response.text[:400]}")
         return None
 
     # ─────────────────────────────────────────────────────────────────
@@ -387,7 +387,7 @@ class Graph:
         response = requests.get(download_url)
         if response.status_code == 200:
             return response.content
-        print(f"❌ Error downloading file ({response.status_code}): {response.text[:400]}")
+        print(f"[ERROR] Error downloading file ({response.status_code}): {response.text[:400]}")
         return None
 
     def mark_as_read(self, email_id):
